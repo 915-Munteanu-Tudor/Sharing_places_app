@@ -26,7 +26,7 @@ const getPlaceById = async (req, res, next) => {
     );
   }
 
-  res.json({ place: place.toObject({ getters: true }) }); // { place } => { place: place } and turn into js object and remove _ to id
+  res.json({ place: place.toObject({ getters: true }) }); // { place } => { place: place }; and turn into js object and remove _ to id
 };
 
 const getPlacesByUserId = async (req, res, next) => {

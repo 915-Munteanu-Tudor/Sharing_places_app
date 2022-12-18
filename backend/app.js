@@ -11,6 +11,16 @@ const app = express();
 //extracts json from body, to any request incoming, calls next
 app.use(bodyParser.json());
 
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*"); //cors, allows certain domains to have access
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  ); //specify the headers the requests sent by the browser may have
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE");
+  next();
+});
+
 app.use("/api/places", placesRoutes);
 app.use("/api/users", usersRoutes);
 
@@ -30,12 +40,12 @@ app.use((error, req, res, next) => {
 });
 
 mongoose
-  .connect('mongodb+srv://tudor:agIlaOC71LUJH418@cluster0.n41cdee.mongodb.net/mern?retryWrites=true&w=majority')
+  .connect(
+    "mongodb+srv://tudor:agIlaOC71LUJH418@cluster0.n41cdee.mongodb.net/mern?retryWrites=true&w=majority"
+  ) // mern = db name
   .then(() => {
     app.listen(5000);
   })
-  .catch(err => {
+  .catch((err) => {
     console.log(err);
   });
-
-
