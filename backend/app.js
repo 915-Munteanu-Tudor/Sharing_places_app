@@ -1,6 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const fs = require('fs');
+const path = require('path');
 
 const placesRoutes = require("./routes/places-routes");
 const usersRoutes = require("./routes/users-routes");
@@ -10,6 +12,8 @@ const app = express();
 
 //extracts json from body, to any request incoming, calls next
 app.use(bodyParser.json());
+
+app.use('/uploads/images', express.static(path.join('uploads', 'images'))); //just return statically the file from the path
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*"); //cors, allows certain domains to have access
@@ -31,6 +35,11 @@ app.use((req, res, next) => {
 
 //error handling middleware function
 app.use((error, req, res, next) => {
+  if (req.file) {
+    fs.unlink(req.file.path, (err) => {
+      console.log(err);
+    });
+  }
   //if resp has already been sent
   if (res.headerSent) {
     return next(error);
