@@ -50,10 +50,10 @@ app.use((error, req, res, next) => {
 
 mongoose
   .connect(
-    "mongodb+srv://tudor:agIlaOC71LUJH418@cluster0.n41cdee.mongodb.net/mern?retryWrites=true&w=majority"
+    `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.lycgfjj.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`
   ) // mern = db name
   .then(() => {
-    app.listen(5000);
+    app.listen(process.env.PORT || 5000);
   })
   .catch((err) => {
     console.log(err);

@@ -1,0 +1,9 @@
+{
+    "env": {
+        "DB_USER": "tudor",
+        "DB_PASSWORD": "noZVhNiQgMdPXmNm",
+        "DB_NAME": "mern-dev",
+        "GOOGLE_API_KEY": "AIzaSyBZf97lrMh3IjvlP4pAXcSYPuA3NoITtjc",
+        "JWT_KEY": "supersecret_dont_share"
+    }
+}
